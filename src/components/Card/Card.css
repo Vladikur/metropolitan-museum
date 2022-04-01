@@ -79,7 +79,7 @@
 }
 
 .news-card__post-date {
-  font-size: .7rem;
+  font-size: .8rem;
   margin-bottom: .5rem;
   color: #CCC;
 }
@@ -114,5 +114,9 @@
 
 .news-card__excerpt {
   font-weight: 300;
-  margin: 0;
+  margin: 3px 0 0 0;
+}
+
+.news-card__excerpt span {
+  color: rgb(255, 201, 83);
 }

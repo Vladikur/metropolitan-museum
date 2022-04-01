@@ -1,6 +1,6 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { IObject } from '../../types/types';
-import vase from '../../images/vase.png';
+import vase from '../../images/no-image.png';
 
 interface CardProps {
   object: IObject;
@@ -15,13 +15,13 @@ const Card: FC<CardProps> = ({ object }) => {
     <div className="news-card">
       <img src={primaryImageSmall ? primaryImageSmall : vase} alt="" className="news-card__image" />
       <div className="news-card__text-wrapper">
-        <h2 className="news-card__title">{department ? department : 'unknown'}</h2>
-        <div className="news-card__post-date">{objectDate ? objectDate : 'unknown'}</div>
+        <h2 className="news-card__title">{objectName ? objectName : 'unknown'}</h2>
+        <div className="news-card__post-date">{department ? department : 'unknown'}</div>
         <div className="news-card__details-wrapper">
-          <p className="news-card__excerpt">{objectName ? objectName : 'unknown'}</p>
-          <p className="news-card__excerpt">Classification: {classification ? classification : 'unknown'}</p>
-          <p className="news-card__excerpt">Medium: {medium ? medium : 'unknown'}</p>
-          <p className="news-card__excerpt">Author: {constituents ? constituents[0].name : 'unknown'}</p>
+          <p className="news-card__excerpt"><span>Year:</span> {objectDate ? objectDate : 'unknown'}</p>
+          <p className="news-card__excerpt"><span>Classification:</span> {classification ? classification : 'unknown'}</p>
+          <p className="news-card__excerpt"><span>Medium:</span> {medium ? medium : 'unknown'}</p>
+          <p className="news-card__excerpt"><span>Author:</span> {constituents ? constituents[0].name : 'unknown'}</p>
         </div>
       </div>
     </div>

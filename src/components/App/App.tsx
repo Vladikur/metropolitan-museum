@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
-import Card from '../Card/Card';
+import Gallery from '../Gallery/Gallery';
 import { IObject } from '../../types/types';
 import { IDepartment } from '../../types/types';
 import { departmentInitialState } from '../../constants/constants';
@@ -22,9 +22,11 @@ const App = () => {
   }, [department])
 
   const fetchDepartment = () => {
-    axios.get<IDepartment>(`https://collectionapi.metmuseum.org/public/collection/v1/search?hasImages=true&q=Auguste Renoir`)
+    axios.get<IDepartment>(`https://collectionapi.metmuseum.org/public/collection/v1/search?q=v45`)
     .then(res => {
-      setDepartment(res.data)
+      if (res.data.total) {
+        setDepartment(res.data)
+      }
       console.log(res.data)
     })
     .catch((err) => {
@@ -62,24 +64,10 @@ const App = () => {
 
   return (
     <div className="app">
-      <div className="app__content">
-        <div className="content-wrapper">
-          {firstColumnObjects.map((object) => (
-            <Card
-              key={object.objectID}
-              object={object}
-            />
-          ))}
-        </div>
-        <div className="content-wrapper">
-          {secondColumnObjects.map((object) => (
-            <Card
-              key={object.objectID}
-              object={object}
-            />
-          ))}
-        </div>
-      </div>
+      <Gallery
+        firstColumnObjects={firstColumnObjects}
+        secondColumnObjects={secondColumnObjects}
+      />
     </div>
   );
 }

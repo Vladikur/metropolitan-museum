@@ -1,0 +1,11 @@
+.gallery {
+  margin: auto;
+  display: flex;
+  max-width: 900px;
+}
+
+@media screen and (max-width: 620px) {
+  .gallery {
+    flex-wrap: wrap;
+  }
+}

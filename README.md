@@ -1,4 +1,4 @@
-# Приложение Metropolitan Museum
+# Приложение Metropolitan museum
 
 ## О приложении
 Небольшая галерея коллекции Metropolitan музея из открытого api https://metmuseum.github.io/
