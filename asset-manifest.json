@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/metropolitan-museum/static/css/main.f2490e30.css",
-    "main.js": "/metropolitan-museum/static/js/main.b6381747.js",
+    "main.css": "/metropolitan-museum/static/css/main.d235a4fd.css",
+    "main.js": "/metropolitan-museum/static/js/main.78db33e2.js",
     "static/js/787.84fcc678.chunk.js": "/metropolitan-museum/static/js/787.84fcc678.chunk.js",
-    "static/media/vase.png": "/metropolitan-museum/static/media/vase.9270a2cfc2358f4c0a20.png",
+    "static/media/no-image.png": "/metropolitan-museum/static/media/no-image.1526c73a678cad614cef.png",
     "index.html": "/metropolitan-museum/index.html",
-    "main.f2490e30.css.map": "/metropolitan-museum/static/css/main.f2490e30.css.map",
-    "main.b6381747.js.map": "/metropolitan-museum/static/js/main.b6381747.js.map",
+    "main.d235a4fd.css.map": "/metropolitan-museum/static/css/main.d235a4fd.css.map",
+    "main.78db33e2.js.map": "/metropolitan-museum/static/js/main.78db33e2.js.map",
     "787.84fcc678.chunk.js.map": "/metropolitan-museum/static/js/787.84fcc678.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.f2490e30.css",
-    "static/js/main.b6381747.js"
+    "static/css/main.d235a4fd.css",
+    "static/js/main.78db33e2.js"
   ]
 }
