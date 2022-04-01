@@ -7,8 +7,8 @@ import { departmentInitialState } from '../../constants/constants';
 
 
 const App = () => {
-
-  const [objects, setObjects] = useState<IObject[]>([])
+  const [firstColumnObjects, setFirstColumnObjects] = useState<IObject[]>([])
+  const [secondColumnObjects, setSecondColumnObjects] = useState<IObject[]>([])
   const [department, setDepartment] = useState<IDepartment>(departmentInitialState)
 
   useEffect(() => {
@@ -16,13 +16,13 @@ const App = () => {
   }, [])
 
   useEffect(() => {
-    if (department.objectIDs.length > 5) {
+    if (department.objectIDs.length > 2) {
       fetchAllObjects()
     }
   }, [department])
 
   const fetchDepartment = () => {
-    axios.get<IDepartment>(`https://collectionapi.metmuseum.org/public/collection/v1/search?departmentId=${13}&q=cat`)
+    axios.get<IDepartment>(`https://collectionapi.metmuseum.org/public/collection/v1/search?hasImages=true&q=Auguste Renoir`)
     .then(res => {
       setDepartment(res.data)
       console.log(res.data)
@@ -33,34 +33,53 @@ const App = () => {
   }
 
   const fetchObject = (id: number) => {
-    axios.get<IObject>(`https://collectionapi.metmuseum.org/public/collection/v1/objects/${id}`)
-    .then(res => {
-      setObjects([...objects, res.data])
-    })
+    return axios.get<IObject>(`https://collectionapi.metmuseum.org/public/collection/v1/objects/${id}`)
+  }
+
+  const fetchAllObjects = () => {
+    const objectsArray: number[] = department.objectIDs
+    const vievObjects: number[] = objectsArray.slice(0, 10)
+    axios.all([
+      fetchObject(vievObjects[0]),
+      fetchObject(vievObjects[1]),
+      fetchObject(vievObjects[2]),
+      fetchObject(vievObjects[3]),
+      fetchObject(vievObjects[4]),
+      fetchObject(vievObjects[5]),
+      fetchObject(vievObjects[6]),
+      fetchObject(vievObjects[7]),
+      fetchObject(vievObjects[8]),
+      fetchObject(vievObjects[9]),
+    ])
+    .then(axios.spread(function (obj1, obj2, obj3, obj4, obj5, obj6, obj7, obj8, obj9, obj10) {
+      setFirstColumnObjects([obj1.data, obj3.data, obj5.data, obj7.data, obj9.data])
+      setSecondColumnObjects([obj2.data, obj4.data, obj6.data, obj8.data, obj10.data])
+    }))
     .catch((err) => {
       console.log(err)
     })
   }
 
-  const fetchAllObjects = () => {
-    const objectsArray: number[] = department.objectIDs
-    const firstSixObjects: number[] = objectsArray.slice(0, 6)
-    fetchObject(firstSixObjects[0])
-    fetchObject(firstSixObjects[1])
-    fetchObject(firstSixObjects[2])
-    fetchObject(firstSixObjects[3])
-    fetchObject(firstSixObjects[4])
-    fetchObject(firstSixObjects[5])
-  }
-
   return (
     <div className="app">
-      {objects.map((object) => (
-        <Card
-          key={object.objectID}
-          object={object}
-        />
-      ))}
+      <div className="app__content">
+        <div className="content-wrapper">
+          {firstColumnObjects.map((object) => (
+            <Card
+              key={object.objectID}
+              object={object}
+            />
+          ))}
+        </div>
+        <div className="content-wrapper">
+          {secondColumnObjects.map((object) => (
+            <Card
+              key={object.objectID}
+              object={object}
+            />
+          ))}
+        </div>
+      </div>
     </div>
   );
 }

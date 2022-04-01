@@ -10,6 +10,10 @@ export interface IObject {
   primaryImageSmall: string;
   culture: string;
   objectName: string;
+  department: string;
+  objectDate: string;
+  medium: string;
+  classification: string;
   constituents: IConstituents[];
 }
 

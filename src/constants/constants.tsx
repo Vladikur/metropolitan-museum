@@ -7,6 +7,10 @@ export const objectInitialState: IObject = {
   primaryImageSmall: '',
   culture: '',
   objectName: '',
+  department: '',
+  objectDate: '',
+  medium: '',
+  classification: '',
   constituents: [
     {
       constituentID: 1,
