@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/metropolitan-museum/static/css/main.f2490e30.css",
+    "main.js": "/metropolitan-museum/static/js/main.b6381747.js",
+    "static/js/787.84fcc678.chunk.js": "/metropolitan-museum/static/js/787.84fcc678.chunk.js",
+    "static/media/vase.png": "/metropolitan-museum/static/media/vase.9270a2cfc2358f4c0a20.png",
+    "index.html": "/metropolitan-museum/index.html",
+    "main.f2490e30.css.map": "/metropolitan-museum/static/css/main.f2490e30.css.map",
+    "main.b6381747.js.map": "/metropolitan-museum/static/js/main.b6381747.js.map",
+    "787.84fcc678.chunk.js.map": "/metropolitan-museum/static/js/787.84fcc678.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f2490e30.css",
+    "static/js/main.b6381747.js"
+  ]
+}
