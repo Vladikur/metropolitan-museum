@@ -22,7 +22,7 @@ const App = () => {
   }, [department])
 
   const fetchDepartment = () => {
-    axios.get<IDepartment>(`https://collectionapi.metmuseum.org/public/collection/v1/search?q=Auguste Renoir`)
+    axios.get<IDepartment>(`https://collectionapi.metmuseum.org/public/collection/v1/search?q=Auguste`)
     .then(res => {
       if (res.data.total) {
         setDepartment(res.data)
