@@ -6,29 +6,43 @@ import { IDepartment } from '../../types/types';
 import { departmentInitialState } from '../../constants/constants';
 import Header from '../Header/Header';
 import Search from '../Search/Search';
+import Preloader from '../Preloader/Preloader';
 
 
 const App = () => {
 
   const [objects, setObjects] = useState<IObject[]>([])
   const [department, setDepartment] = useState<IDepartment>(departmentInitialState)
+  const [preloader, setPreloader] = useState<boolean>(true)
+  const [errorMassage, setErrorMassage] = useState<string>('')
 
   useEffect(() => {
     if (department.objectIDs.length > 0) {
       fetchAllObjects()
+    } else {
+      setPreloader(false)
     }
   }, [department])
 
   const fetchObjectIds = (value: string) => {
+    setPreloader(true)
+    setObjects([])
+    setErrorMassage('')
     axios.get<IDepartment>(`https://collectionapi.metmuseum.org/public/collection/v1/search?q=${value}`)
     .then(res => {
-      if (res.data.total) {
+      if (res.data.objectIDs) {
         setDepartment(res.data)
+      } else {
+        console.log('hi')
+        setPreloader(false)
+        setErrorMassage('По вашему запросу ничего не найдено.')
       }
       console.log(res.data)
+      return res
     })
     .catch((err) => {
       console.log(err)
+      setPreloader(false)
     })
   }
 
@@ -47,13 +61,22 @@ const App = () => {
   }
 
   async function getVievObjects(vievObjects: number[]) {
-    let arr: IObject[] = await Promise.all(vievObjects.map(async (value) => {
-      let v = await fetchObject(value);
+    await Promise.all(vievObjects.map(async (value) => {
+      let v = await fetchObject(value)
       const data: IObject = v.data
       return data;
-    }));
-  
-    setObjects(arr);
+    }))
+    .then(res => {
+      setObjects(res);
+      console.log(res)
+    })
+    .catch((err) => {
+      console.log(err)
+      setErrorMassage('По вашему запросу ничего не найдено.')
+    })
+    .finally(() => {
+      setPreloader(false)
+    })
   }
 
   const fetchObject = (id: number) => {
@@ -66,9 +89,8 @@ const App = () => {
       <Search
         searchObjects={fetchObjectIds}
       />
-      <Gallery
-        objects={objects}
-      />
+      {errorMassage ? <p className="app__error">{errorMassage}</p> : ''}
+      { preloader ? <Preloader/> : <Gallery objects={objects}/> }
     </div>
   );
 }

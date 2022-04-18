@@ -1,3 +1,9 @@
 body {
   background-color: #555;
 }
+
+.app__error {
+  text-align: center;
+  font-size: 1.5rem;
+  color: white;
+}
