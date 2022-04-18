@@ -1,0 +1,18 @@
+.search {
+  padding: 30px 10px;
+  margin: auto;
+  max-width: 900px;
+  display: flex;
+}
+
+.search__input {
+  padding: 10px 15px;
+  width: 100%;
+  border-radius: 0.5rem;
+  border: none;
+  font-size: 1.5rem;
+}
+
+.search__input:focus {
+  border: none;
+}

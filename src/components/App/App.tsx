@@ -4,6 +4,8 @@ import Gallery from '../Gallery/Gallery';
 import { IObject } from '../../types/types';
 import { IDepartment } from '../../types/types';
 import { departmentInitialState } from '../../constants/constants';
+import Header from '../Header/Header';
+import Search from '../Search/Search';
 
 
 const App = () => {
@@ -12,17 +14,13 @@ const App = () => {
   const [department, setDepartment] = useState<IDepartment>(departmentInitialState)
 
   useEffect(() => {
-    fetchDepartment()
-  }, [])
-
-  useEffect(() => {
     if (department.objectIDs.length > 0) {
       fetchAllObjects()
     }
   }, [department])
 
-  const fetchDepartment = () => {
-    axios.get<IDepartment>(`https://collectionapi.metmuseum.org/public/collection/v1/search?q=Auguste`)
+  const fetchObjectIds = (value: string) => {
+    axios.get<IDepartment>(`https://collectionapi.metmuseum.org/public/collection/v1/search?q=${value}`)
     .then(res => {
       if (res.data.total) {
         setDepartment(res.data)
@@ -64,6 +62,10 @@ const App = () => {
 
   return (
     <div className="app">
+      <Header/>
+      <Search
+        searchObjects={fetchObjectIds}
+      />
       <Gallery
         objects={objects}
       />
